@@ -1,7 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-enum genderCharacter { Male, Female }
+
+class Member {
+  final String firstName;
+  final String secondName;
+  final String lastName;
+  final String nationalID;
+  final String kraPin;
+  final String phoneNumber;
+  final String residence;
+
+  const Member({
+    required this.firstName,
+    required this.secondName,
+    required this.lastName,
+    required this.nationalID,
+    required this.kraPin,
+    required this.phoneNumber,
+    required this.residence});
+
+  factory Member.fromJson(Map<String, dynamic> json){
+    return Member(
+        firstName: json['firstName'],
+        secondName: json['secondName'],
+        lastName: json['lastName'],
+        nationalID: json['nationalID'],
+        kraPin: json['kraPin'],
+        phoneNumber: json['phoneNumber'],
+        residence: json['residence']
+    );
+  }
+}
+
 class Register extends StatefulWidget {
   const Register({super.key});
 
@@ -12,6 +46,49 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
 
   String selectedGender = "";
+
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController secondNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController nationalIDController = TextEditingController();
+  TextEditingController krapinController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController residenceController = TextEditingController();
+  // ========================= Create Member ====================================
+  Future<void> createMember(
+   String firstName,
+   String secondName,
+   String lastName,
+   String nationalID,
+   String kraPin,
+   String phoneNumber,
+   String residence) async {
+    final repsonse = await http.post(
+      Uri.parse('http://127.0.0.1:9000/api/register/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': "application/json"
+      },
+      body: jsonEncode(<String, String>
+      {
+        'first_name': firstName,
+        'second_name': secondName,
+        'last_name': lastName,
+        'nationalID': nationalID,
+        'kraPin': kraPin,
+        'phone_number': phoneNumber
+      }),
+    );
+    if(repsonse.statusCode == 201){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text("Created"),
+
+        )
+      );
+      //return Member.fromJson(jsonDecode(repsonse.body) as Map<String, dynamic>);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,54 +106,60 @@ class _RegisterState extends State<Register> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children:<Widget>[
               TextField(
-                decoration: InputDecoration(
+                controller: firstNameController,
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'First Name'
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextField(
-                decoration: InputDecoration(
+                controller: secondNameController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Second Name'
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextField(
-                decoration: InputDecoration(
+                controller: lastNameController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Last Name'
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextField(
-                decoration: InputDecoration(
+                controller: nationalIDController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'National ID'
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextField(
-                decoration: InputDecoration(
+                controller: krapinController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'KRA Pin'
                 ),
               ),
-              SizedBox(height: 10,),
-              TextField(
+              const SizedBox(height: 10,),
+              const TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Date Of Birth'
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               TextField(
-                decoration: InputDecoration(
+                controller: phoneNumberController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Phone Number'
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Column(
                 children: [
                   ListTile(
@@ -106,25 +189,35 @@ class _RegisterState extends State<Register> {
                 ],
               ),
               TextField(
-                decoration: InputDecoration(
+                controller: residenceController,
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Residence'
                 ),
               ),
+              const SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: (){},
-                      child: Text('Register')
+                      onPressed: (){
+                        createMember(
+                            firstNameController.text,
+                            secondNameController.text,
+                            lastNameController.text,
+                            nationalIDController.text,
+                            krapinController.text,
+                            phoneNumberController.text,
+                            residenceController.text);
+                      },
+                      child: const Text('Register')
                   ),
                   ElevatedButton(
                       onPressed: (){},
-                      child: Text('Cancel')
+                      child: const Text('Cancel')
                   )
                 ],
               ),
-
             ],
           ),
         ),
