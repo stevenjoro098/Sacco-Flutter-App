@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'register.dart';
+import 'make_contribution.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -87,7 +89,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       const SizedBox(width: 8),
                       TextButton(
                         child: const Text('Make Contribution'),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const MakeContribution()));
+
+                        },
                       ),
                       const SizedBox(width: 8),
                     ],
@@ -163,17 +169,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
             ),
-            Card(
+            const Card(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const ListTile(
+                  ListTile(
                     leading: Icon(Icons.money_outlined),
                     title: Text("Ksh. 5000"),
-                    subtitle: Text("Amount"),
+
                   ),
 
-                  SizedBox(height: 10,)
+                  SizedBox(height: 8,)
                 ],
               ),
             ),
@@ -184,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                    ListTile(
                     leading: Icon(Icons.money_outlined),
                     title: Text("Ksh. 5000"),
-                    subtitle: Text("Amount"),
+
                     trailing: IconButton(
                         onPressed: (){},
                         icon: const Icon(Icons.remove_red_eye)
