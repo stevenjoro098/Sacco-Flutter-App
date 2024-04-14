@@ -45,7 +45,7 @@ class _CardWithDrawerState extends State<CardWithDrawer> {
                   TextFormField(
                     controller: _textEditingController,
                     decoration: const InputDecoration(
-                      labelText: '+254XXXXXXXX',
+                      labelText: '+254********',
                       border: OutlineInputBorder(),
                     ),
                   ),

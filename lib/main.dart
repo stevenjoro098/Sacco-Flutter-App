@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'register.dart';
 import 'make_contribution.dart';
+import 'view_history.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -39,9 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
    // than having to individually change instances of widgets.
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
               const SizedBox(height: 20,),
               Row(
@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text("Hello, Stephen",
                     style: TextStyle(
                       fontSize: 20,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold
                     ),
                   ),
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: const Icon(Icons.person))
                 ],
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text('Total Contributions:',
@@ -84,12 +85,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       TextButton(
                         child: const Text('View History'),
-                        onPressed:(){},
+                        onPressed:(){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const ViewHistory()));
+
+                        },
                       ),
                       const SizedBox(width: 8),
                       TextButton(
                         child: const Text('Make Contribution'),
                         onPressed: () {
+                          print('Pressed');
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => const MakeContribution()));
 
@@ -102,73 +108,73 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Recent Transactions:',
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18
-                    ),
-                  ),
-                  Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const ListTile(
-                          leading: Icon(Icons.money_outlined),
-                          title: Text("Ksh. 5000"),
-                          subtitle: Text("Amount"),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            TextButton(
-                              child: const Text('View History'),
-                              onPressed:(){},
-                            ),
-                            const SizedBox(width: 8),
-                            TextButton(
-                              child: const Text('Make Contribution'),
-                              onPressed: () {},
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                        ),
-                        SizedBox(height: 10,)
-                      ],
-                    ),
-                  ),
-                  Card(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const ListTile(
-                          leading: Icon(Icons.money_outlined),
-                          title: Text("Ksh. 5000"),
-                          subtitle: Text("Amount"),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            TextButton(
-                              child: const Text('View History'),
-                              onPressed:(){},
-                            ),
-                            const SizedBox(width: 8),
-                            TextButton(
-                              child: const Text('Make Contribution'),
-                              onPressed: () {},
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                        ),
-                        SizedBox(height: 10,)
-                      ],
-                    ),
-                  ),
-                ],
-            ),
+            //   Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     children: [
+            //       Text('Recent Transactions:',
+            //         style: TextStyle(
+            //             fontFamily: "Poppins",
+            //             fontSize: 18
+            //         ),
+            //       ),
+            //       Card(
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             const ListTile(
+            //               leading: Icon(Icons.money_outlined),
+            //               title: Text("Ksh. 5000"),
+            //               subtitle: Text("Amount"),
+            //             ),
+            //             Row(
+            //               mainAxisAlignment: MainAxisAlignment.end,
+            //               children: <Widget>[
+            //                 TextButton(
+            //                   child: const Text('View History'),
+            //                   onPressed:(){},
+            //                 ),
+            //                 const SizedBox(width: 8),
+            //                 TextButton(
+            //                   child: const Text('Make Contribution'),
+            //                   onPressed: () {},
+            //                 ),
+            //                 const SizedBox(width: 8),
+            //               ],
+            //             ),
+            //             SizedBox(height: 10,)
+            //           ],
+            //         ),
+            //       ),
+            //       Card(
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             const ListTile(
+            //               leading: Icon(Icons.money_outlined),
+            //               title: Text("Ksh. 5000"),
+            //               subtitle: Text("Amount"),
+            //             ),
+            //             Row(
+            //               mainAxisAlignment: MainAxisAlignment.end,
+            //               children: <Widget>[
+            //                 TextButton(
+            //                   child: const Text('View History'),
+            //                   onPressed:(){},
+            //                 ),
+            //                 const SizedBox(width: 8),
+            //                 TextButton(
+            //                   child: const Text('Make Contribution'),
+            //                   onPressed: () {},
+            //                 ),
+            //                 const SizedBox(width: 8),
+            //               ],
+            //             ),
+            //             SizedBox(height: 10,)
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            // ),
             const Card(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -196,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: const Icon(Icons.remove_red_eye)
                     ),
                   ),
-                  
+
                   SizedBox(height: 10,)
                 ],
               ),
