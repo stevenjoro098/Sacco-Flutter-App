@@ -76,7 +76,8 @@ class _RegisterState extends State<Register> {
         'last_name': lastName,
         'nationalID': nationalID,
         'kraPin': kraPin,
-        'phone_number': phoneNumber
+        'phone_number': phoneNumber,
+        'residence': residence
       }),
     );
     if(repsonse.statusCode == 201){
@@ -87,6 +88,23 @@ class _RegisterState extends State<Register> {
         )
       );
       //return Member.fromJson(jsonDecode(repsonse.body) as Map<String, dynamic>);
+    } else {
+      List<dynamic> jsonResponse = json.decode(repsonse.body);
+      var data = jsonResponse.first;
+      Map<String, List<String>> _data = data;
+      List<String> errorMessageList = [];
+      _data.forEach((key, value) {
+        for(String error in value){
+          errorMessageList.add('$key: $error');
+        }
+      });
+      print(_data);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Created"),
+
+          )
+          );
     }
   }
 

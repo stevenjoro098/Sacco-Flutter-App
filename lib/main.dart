@@ -36,15 +36,165 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+              const SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Hello, Stephen",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: (){},
+                      icon: const Icon(Icons.person))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('Total Contributions:',
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 23,
+                      fontFamily: 'Poppins'
+                    )
+                    ),
+                ],
+              ),
+              Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ListTile(
+                    leading: Icon(Icons.money_outlined),
+                    title: Text("Ksh. 5000"),
+                    subtitle: Text("Amount"),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: const Text('View History'),
+                        onPressed:(){},
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        child: const Text('Make Contribution'),
+                        onPressed: () {},
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                  SizedBox(height: 10,)
+                ],
+              ),
+            ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('Recent Transactions:',
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 18
+                    ),
+                  ),
+                  Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const ListTile(
+                          leading: Icon(Icons.money_outlined),
+                          title: Text("Ksh. 5000"),
+                          subtitle: Text("Amount"),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            TextButton(
+                              child: const Text('View History'),
+                              onPressed:(){},
+                            ),
+                            const SizedBox(width: 8),
+                            TextButton(
+                              child: const Text('Make Contribution'),
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                        ),
+                        SizedBox(height: 10,)
+                      ],
+                    ),
+                  ),
+                  Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const ListTile(
+                          leading: Icon(Icons.money_outlined),
+                          title: Text("Ksh. 5000"),
+                          subtitle: Text("Amount"),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            TextButton(
+                              child: const Text('View History'),
+                              onPressed:(){},
+                            ),
+                            const SizedBox(width: 8),
+                            TextButton(
+                              child: const Text('Make Contribution'),
+                              onPressed: () {},
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                        ),
+                        SizedBox(height: 10,)
+                      ],
+                    ),
+                  ),
+                ],
+            ),
+            Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ListTile(
+                    leading: Icon(Icons.money_outlined),
+                    title: Text("Ksh. 5000"),
+                    subtitle: Text("Amount"),
+                  ),
 
+                  SizedBox(height: 10,)
+                ],
+              ),
+            ),
+            Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                   ListTile(
+                    leading: Icon(Icons.money_outlined),
+                    title: Text("Ksh. 5000"),
+                    subtitle: Text("Amount"),
+                    trailing: IconButton(
+                        onPressed: (){},
+                        icon: const Icon(Icons.remove_red_eye)
+                    ),
+                  ),
+                  
+                  SizedBox(height: 10,)
+                ],
+              ),
+            ),
           ],
         ),
       ),
