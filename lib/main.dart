@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: EdgeInsets.all(4.5),
                       child: Column(
                         children: [
-                          Icon(Icons.warehouse_outlined),
+                          Icon(Icons.account_balance),
                           Text('Loans')
                         ],
                       ),
