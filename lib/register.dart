@@ -11,6 +11,7 @@ class Member {
   final String lastName;
   final String nationalID;
   final String kraPin;
+  final String dob;
   final String phoneNumber;
   final String residence;
 
@@ -20,6 +21,7 @@ class Member {
     required this.lastName,
     required this.nationalID,
     required this.kraPin,
+    required this.dob,
     required this.phoneNumber,
     required this.residence});
 
@@ -30,6 +32,7 @@ class Member {
         lastName: json['lastName'],
         nationalID: json['nationalID'],
         kraPin: json['kraPin'],
+        dob: json['dob'],
         phoneNumber: json['phoneNumber'],
         residence: json['residence']
     );
@@ -62,7 +65,7 @@ class _RegisterState extends State<Register> {
    String nationalID,
    String kraPin,
    String phoneNumber,
-   String residence) async {
+   String residence, String text) async {
     final repsonse = await http.post(
       Uri.parse('http://127.0.0.1:9000/api/register/'),
       headers: <String, String>{
@@ -90,18 +93,18 @@ class _RegisterState extends State<Register> {
       //return Member.fromJson(jsonDecode(repsonse.body) as Map<String, dynamic>);
     } else {
       List<dynamic> jsonResponse = json.decode(repsonse.body);
-      var data = jsonResponse.first;
-      Map<String, List<String>> _data = data;
-      List<String> errorMessageList = [];
-      _data.forEach((key, value) {
-        for(String error in value){
-          errorMessageList.add('$key: $error');
-        }
-      });
-      print(_data);
+      // var data = jsonResponse.first;
+      // Map<String, List<String>> _data = data;
+      // List<String> errorMessageList = [];
+      // _data.forEach((key, value) {
+      //   for(String error in value){
+      //     errorMessageList.add('$key: $error');
+      //   }
+      // });
+      // print(_data);
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Created"),
+            content: Text(jsonResponse[0]),
 
           )
           );
@@ -225,8 +228,10 @@ class _RegisterState extends State<Register> {
                             lastNameController.text,
                             nationalIDController.text,
                             krapinController.text,
+                            selectedGender,
                             phoneNumberController.text,
-                            residenceController.text);
+                            residenceController.text
+                        );
                       },
                       child: const Text('Register')
                   ),

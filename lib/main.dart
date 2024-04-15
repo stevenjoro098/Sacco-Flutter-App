@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'register.dart';
 import 'make_contribution.dart';
 import 'view_history.dart';
+import 'loans.dart';
 
 void main() {
   runApp(const MyApp());
@@ -108,74 +109,74 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            //   Row(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     children: [
-            //       Text('Recent Transactions:',
-            //         style: TextStyle(
-            //             fontFamily: "Poppins",
-            //             fontSize: 18
-            //         ),
-            //       ),
-            //       Card(
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             const ListTile(
-            //               leading: Icon(Icons.money_outlined),
-            //               title: Text("Ksh. 5000"),
-            //               subtitle: Text("Amount"),
-            //             ),
-            //             Row(
-            //               mainAxisAlignment: MainAxisAlignment.end,
-            //               children: <Widget>[
-            //                 TextButton(
-            //                   child: const Text('View History'),
-            //                   onPressed:(){},
-            //                 ),
-            //                 const SizedBox(width: 8),
-            //                 TextButton(
-            //                   child: const Text('Make Contribution'),
-            //                   onPressed: () {},
-            //                 ),
-            //                 const SizedBox(width: 8),
-            //               ],
-            //             ),
-            //             SizedBox(height: 10,)
-            //           ],
-            //         ),
-            //       ),
-            //       Card(
-            //         child: Column(
-            //           mainAxisSize: MainAxisSize.min,
-            //           children: [
-            //             const ListTile(
-            //               leading: Icon(Icons.money_outlined),
-            //               title: Text("Ksh. 5000"),
-            //               subtitle: Text("Amount"),
-            //             ),
-            //             Row(
-            //               mainAxisAlignment: MainAxisAlignment.end,
-            //               children: <Widget>[
-            //                 TextButton(
-            //                   child: const Text('View History'),
-            //                   onPressed:(){},
-            //                 ),
-            //                 const SizedBox(width: 8),
-            //                 TextButton(
-            //                   child: const Text('Make Contribution'),
-            //                   onPressed: () {},
-            //                 ),
-            //                 const SizedBox(width: 8),
-            //               ],
-            //             ),
-            //             SizedBox(height: 10,)
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            // ),
-            const Card(
+            SizedBox(height: 18,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                //mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FloatingActionButton(
+                    onPressed:(){
+                      
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.5),
+                      child: Column(
+                        children: [
+                          Icon(Icons.bar_chart),
+                          Text('Trend')
+                        ],
+                      ),
+                    ),
+                  ),
+                    FloatingActionButton(
+                      onPressed:(){
+                        print('less');
+                      } ,
+                      child: Text(''),
+                    ),
+                  FloatingActionButton(
+                    onPressed:(){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Loans()));
+
+                    } ,
+                    child: Padding(
+                      padding: EdgeInsets.all(4.5),
+                      child: Column(
+                        children: [
+                          Icon(Icons.warehouse_outlined),
+                          Text('Loans')
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                //mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FloatingActionButton(
+                    onPressed:(){} ,
+                    child: Icon(Icons.calculate),
+                  ),
+                  FloatingActionButton(
+                    onPressed:(){} ,
+                    child: Text(''),
+                  ),
+                  FloatingActionButton(
+                    onPressed:(){} ,
+                    child: Text('Loans'),
+                  )
+                ],
+              ),
+            ),
+            Card(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -210,11 +211,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:FloatingActionButton(
         onPressed: (){
           Navigator.push(context,
             MaterialPageRoute(builder: (context) => const Register()));
-
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
