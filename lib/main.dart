@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       TextButton(
                         child: const Text('Make Contribution'),
                         onPressed: () {
-                          print('Pressed');
+
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => const MakeContribution()));
 
@@ -116,26 +116,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 //mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  FloatingActionButton(
-                    onPressed:(){
-                      
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.5),
-                      child: Column(
-                        children: [
-                          Icon(Icons.bar_chart),
-                          Text('Trend')
-                        ],
-                      ),
-                    ),
-                  ),
-                    FloatingActionButton(
-                      onPressed:(){
-                        print('less');
-                      } ,
-                      child: Text(''),
-                    ),
+                  // FloatingActionButton(
+                  //   onPressed:(){
+                  //
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(4.5),
+                  //     child: Column(
+                  //       children: [
+                  //         Icon(Icons.bar_chart),
+                  //         Text('Trend')
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  //   FloatingActionButton(
+                  //     onPressed:(){
+                  //       print('less');
+                  //     } ,
+                  //     child: Text(''),
+                  //   ),
                   FloatingActionButton(
                     onPressed:(){
                       Navigator.push(context,
@@ -144,81 +144,81 @@ class _MyHomePageState extends State<MyHomePage> {
                     } ,
                     child: Padding(
                       padding: EdgeInsets.all(4.5),
-                      child: Column(
-                        children: [
-                          Icon(Icons.account_balance),
-                          Text('Loans')
-                        ],
-                      ),
+                       child: Text('Loans')// Column(
+                      //   children: [
+                      //     Icon(Icons.account_balance),
+                      //
+                      //   ],
+                      // ),
                     ),
                   )
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                //mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FloatingActionButton(
-                    onPressed:(){} ,
-                    child: Icon(Icons.calculate),
-                  ),
-                  FloatingActionButton(
-                    onPressed:(){} ,
-                    child: Text(''),
-                  ),
-                  FloatingActionButton(
-                    onPressed:(){} ,
-                    child: Text('Loans'),
-                  )
-                ],
-              ),
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.money_outlined),
-                    title: Text("Ksh. 5000"),
-
-                  ),
-
-                  SizedBox(height: 8,)
-                ],
-              ),
-            ),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                   ListTile(
-                    leading: Icon(Icons.money_outlined),
-                    title: Text("Ksh. 5000"),
-
-                    trailing: IconButton(
-                        onPressed: (){},
-                        icon: const Icon(Icons.remove_red_eye)
-                    ),
-                  ),
-
-                  SizedBox(height: 10,)
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Row(
+            //     //mainAxisSize: MainAxisSize.min,
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       FloatingActionButton(
+            //         onPressed:(){} ,
+            //         child: Icon(Icons.calculate),
+            //       ),
+            //       FloatingActionButton(
+            //         onPressed:(){} ,
+            //         child: Text(''),
+            //       ),
+            //       FloatingActionButton(
+            //         onPressed:(){} ,
+            //         child: Text('Loans'),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            // Card(
+            //   child: Column(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       ListTile(
+            //         leading: Icon(Icons.money_outlined),
+            //         title: Text("Ksh. 5000"),
+            //
+            //       ),
+            //
+            //       SizedBox(height: 8,)
+            //     ],
+            //   ),
+            // ),
+            // Card(
+            //   child: Column(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //        ListTile(
+            //         leading: Icon(Icons.money_outlined),
+            //         title: Text("Ksh. 5000"),
+            //
+            //         trailing: IconButton(
+            //             onPressed: (){},
+            //             icon: const Icon(Icons.remove_red_eye)
+            //         ),
+            //       ),
+            //
+            //       SizedBox(height: 10,)
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
-      floatingActionButton:FloatingActionButton(
-        onPressed: (){
-          Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Register()));
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton:FloatingActionButton(
+      //   onPressed: (){
+      //     Navigator.push(context,
+      //       MaterialPageRoute(builder: (context) => const Register()));
+      //   },
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
