@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -60,6 +61,7 @@ class _loanDetailsState extends State<loanDetails> {
           children: [
             Card(
               elevation: 2,
+              color: Colors.blueAccent,
               child: Column(
                 children: [
                   ListTile(
@@ -71,32 +73,45 @@ class _loanDetailsState extends State<loanDetails> {
                     subtitle: Text('To Date: ${loanDetails['to_date']}'),
                   ),
                   ListTile(
-                    title: Text('Total Paid: ${loanDetails['total_paid']}'),
+                    title: Text('Total Paid: ${loanDetails['total_paid']}', style: TextStyle(fontWeight: FontWeight.bold),),
                   ),
                 ],
               ),
             ),
 
             const SizedBox(height: 20),
-            const Text(
-              'Loan Repayments:',
-              style: TextStyle(fontFamily:'poppins',fontSize: 18, fontWeight: FontWeight.bold),
+            const Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Loan Repayments:',
+                    style: TextStyle(fontFamily:'poppins',fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-            ListView.builder(
+            loanRepayments.isEmpty ?
+                Center(
+                  child: Image.asset('assets/images/not-found.gif', width: 200, height: 200)
+                )
+            :ListView.builder(
               shrinkWrap: true,
               itemCount: loanRepayments.length,
               itemBuilder: (context, index) {
                 final repayment = loanRepayments[index];
                 return Card(
                   elevation: 2,
-                  color: Colors.grey[200],
+                  color: Colors.yellow,
                   child: ListTile(
                     title: Text('Amount: ${repayment['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
-                    subtitle: Text('Date Paid: ${repayment['date_paid']}', style: const TextStyle(fontFamily: 'poppins'),),
+                    subtitle: Text('Date Paid: ${repayment['date_paid']}', style: const TextStyle(fontFamily: 'poppins', fontSize: 11, fontWeight: FontWeight.bold),),
+                    trailing: Text('${ repayment['receipt']}'),
                   ),
                 );
               },
             ),
+
           ],
 
         ),

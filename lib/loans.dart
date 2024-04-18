@@ -61,6 +61,7 @@ class _LoansState extends State<Loans> {
                 itemCount: loans_list.length,
                 itemBuilder: (context, index){
                   return Card(
+                    color: Colors.blue,
                     child: Column(
                       children: [
                         ListTile(
