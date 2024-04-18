@@ -28,7 +28,7 @@ class _LoansState extends State<Loans> {
         headers: headers,
       );
       if (response.statusCode == 200) {
-        print(json.decode(response.body));
+        //print(json.decode(response.body));
         setState(() {
           loans_list = json.decode(response.body).cast<Map<String, dynamic>>();
         });
