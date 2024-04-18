@@ -61,29 +61,34 @@ class _LoansState extends State<Loans> {
                 itemCount: loans_list.length,
                 itemBuilder: (context, index){
                   return Card(
-                    color: Colors.blue,
+                    color: Colors.blueAccent,
                     child: Column(
-                      children: [
+                      children: <Widget>[
                         ListTile(
-                          title: Text('Loan Amount: ${ loans_list[index]['amount']}'),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Column(
-                              children: [
-                                Text('Repayment Period: ${ loans_list[index]['repayment_term']} days.'),
-                                Text('Date Applied: ${ loans_list[index]['date_applied']}')
-                              ],
-                            ),
+                          title: Text('Loan Amount: ${ loans_list[index]['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
+                          subtitle: Text('Repayment Period: ${ loans_list[index]['repayment_term']} days.', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
+                          trailing: Image.asset('assets/images/loan.png')
                           ),
-                          trailing: Text('${loans_list[index]['status']}'),
+                        const SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment:MainAxisAlignment.spaceAround,
+                          children: [
+
+                            Chip(
+                              label:Text('${loans_list[index]['status']}'),
+                              labelStyle: const TextStyle(color: Colors.black), // Set the text color
+                              backgroundColor: Colors.yellow, // Set the background color
+                            ),
+                            ElevatedButton(
+                                onPressed: (){
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => const loanDetails()));
+                                },
+                                child: Text('View')
+                            ),
+                          ],
                         ),
-                        ElevatedButton(
-                            onPressed: (){
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => const loanDetails()));
-                            },
-                            child: Text('View')
-                        ),
+
                         SizedBox(height: 10,)
                       ],
                     ),

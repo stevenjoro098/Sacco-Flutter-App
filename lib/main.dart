@@ -76,10 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const ListTile(
+                  ListTile(
                     leading: Icon(Icons.money_outlined),
                     title: Text("Ksh. 5000"),
                     subtitle: Text("Amount"),
+                    trailing: Image.asset('assets/images/cost.png', width: 45,height: 45,),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

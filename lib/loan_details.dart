@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'loan_repayment.dart';
+
 class loanDetails extends StatefulWidget {
   const loanDetails({super.key});
 
@@ -36,7 +38,12 @@ class _loanDetailsState extends State<loanDetails> {
         });
 
       } else if( response.statusCode == 404){
-        print(json.decode(response.body));
+        //print(json.decode(response.body));
+        ScaffoldMessenger.of(context).showSnackBar(
+             SnackBar(
+              content: Text(json.decode(response.body)),
+            )
+        );
       } else {
 
       }
@@ -65,30 +72,46 @@ class _loanDetailsState extends State<loanDetails> {
               child: Column(
                 children: [
                   ListTile(
-                    title: Text('Period: ${loanDetails['period']} days'),
-                    subtitle: Text('Target Amount: ${loanDetails['target_amount']}'),
+                    title: Text('Target Amount:-> ${loanDetails['amount']}', style: const TextStyle(fontWeight: FontWeight.bold),),
+                    subtitle: Text('Repayment Period: ${loanDetails['repayment_term']} days', style: const TextStyle(fontWeight: FontWeight.bold),),
+                    trailing: Chip(
+                      label: Text('${ loanDetails['interest_rate']} %', style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold),),
+                      backgroundColor: Colors.green,
+                    ),
                   ),
                   ListTile(
-                    title: Text('From Date: ${loanDetails['from_date']}'),
-                    subtitle: Text('To Date: ${loanDetails['to_date']}'),
+                    title: Text('Date Applied: ${ loanDetails['date_applied']}', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'poppins'),),
+                    subtitle: Text('Date Approve: ${ loanDetails['date_approved']}', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'poppins'),),
                   ),
                   ListTile(
-                    title: Text('Total Paid: ${loanDetails['total_paid']}', style: TextStyle(fontWeight: FontWeight.bold),),
+                    title: Text('Total Paid: ${loanDetails['total_paid']}', style: const TextStyle(fontWeight: FontWeight.bold),),
                   ),
+                  ListTile(
+                    title: Text('Guarantor(s): ${ loanDetails['guarantors']}', style: TextStyle(fontWeight: FontWeight.bold),),
+                  )
                 ],
               ),
             ),
 
             const SizedBox(height: 20),
-            const Row(
+             Row(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Loan Repayments:',
-                    style: TextStyle(fontFamily:'poppins',fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                Container(
+                    child: Image.asset('assets/images/spending.png', width: 40, height: 40,)
                 ),
+                const Text(
+                  'Loan Repayments:',
+                  style: TextStyle(fontFamily:'poppins',fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                    onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const loanRepayment()));
+
+                    },
+                    icon: const Icon(Icons.mobile_screen_share_outlined),
+                )
               ],
             ),
             loanRepayments.isEmpty ?
@@ -106,7 +129,12 @@ class _loanDetailsState extends State<loanDetails> {
                   child: ListTile(
                     title: Text('Amount: ${repayment['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
                     subtitle: Text('Date Paid: ${repayment['date_paid']}', style: const TextStyle(fontFamily: 'poppins', fontSize: 11, fontWeight: FontWeight.bold),),
-                    trailing: Text('${ repayment['receipt']}'),
+                    trailing: Chip(
+                      label: Text('${ repayment['receipt']}', style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      labelStyle: TextStyle(color: Colors.white), // Set the text color
+                      backgroundColor: Colors.deepOrangeAccent, // Set the background color
+                    )
                   ),
                 );
               },
