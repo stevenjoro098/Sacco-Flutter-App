@@ -147,7 +147,7 @@ class _MakeContributionState extends State<MakeContribution> {
                                 'national_id': _nationalIDController.text,
                                 'amount': _amountController.text
                               };
-                              print(contribData);
+                              //print(contribData);
                               sendMemberContribution(contribData);
                             },
                             child: Text('Pay')

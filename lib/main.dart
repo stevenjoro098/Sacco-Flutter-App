@@ -4,6 +4,7 @@ import 'register.dart';
 import 'make_contribution.dart';
 import 'view_history.dart';
 import 'loans.dart';
+import 'loan_calc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+ List<Map<String, dynamic>> recentTransaction = [{'amt':200}];
   @override
   Widget build(BuildContext context) {
    // than having to individually change instances of widgets.
@@ -43,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
+          //mainAxisSize: MainAxisSize.max,
           children: <Widget>[
               const SizedBox(height: 20,),
               Row(
@@ -73,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               Card(
+                color: Colors.blueAccent,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -85,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      TextButton(
+                      ElevatedButton(
                         child: const Text('View History'),
                         onPressed:(){
                           Navigator.push(context,
@@ -94,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                       ),
                       const SizedBox(width: 8),
-                      TextButton(
+                      ElevatedButton(
                         child: const Text('Make Contribution'),
                         onPressed: () {
 
@@ -110,116 +113,126 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 18,),
+            const SizedBox(height: 18,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 //mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // FloatingActionButton(
-                  //   onPressed:(){
-                  //
-                  //   },
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.all(4.5),
-                  //     child: Column(
-                  //       children: [
-                  //         Icon(Icons.bar_chart),
-                  //         Text('Trend')
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  //   FloatingActionButton(
-                  //     onPressed:(){
-                  //       print('less');
-                  //     } ,
-                  //     child: Text(''),
-                  //   ),
-                  FloatingActionButton(
+                  ElevatedButton(
+                    onPressed:(){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const loanCalculator()));
+
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(4.5),
+                      child: Column(
+                        children: [
+                          Icon(Icons.calculate),
+                          Text('Loan Calculator')
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  ElevatedButton(
                     onPressed:(){
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => const Loans()));
 
                     } ,
-                    child: Padding(
+                    child: const Padding(
                       padding: EdgeInsets.all(4.5),
-                       child: Text('Loans')// Column(
-                      //   children: [
-                      //     Icon(Icons.account_balance),
-                      //
-                      //   ],
-                      // ),
+                       child: Column(
+                        children: [
+                          Icon(Icons.account_balance),
+                          Text('Loans'),
+                        ],
+                      ),
                     ),
                   )
                 ],
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Row(
-            //     //mainAxisSize: MainAxisSize.min,
-            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     children: [
-            //       FloatingActionButton(
-            //         onPressed:(){} ,
-            //         child: Icon(Icons.calculate),
-            //       ),
-            //       FloatingActionButton(
-            //         onPressed:(){} ,
-            //         child: Text(''),
-            //       ),
-            //       FloatingActionButton(
-            //         onPressed:(){} ,
-            //         child: Text('Loans'),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            // Card(
-            //   child: Column(
-            //     mainAxisSize: MainAxisSize.min,
-            //     children: [
-            //       ListTile(
-            //         leading: Icon(Icons.money_outlined),
-            //         title: Text("Ksh. 5000"),
-            //
-            //       ),
-            //
-            //       SizedBox(height: 8,)
-            //     ],
-            //   ),
-            // ),
-            // Card(
-            //   child: Column(
-            //     mainAxisSize: MainAxisSize.min,
-            //     children: [
-            //        ListTile(
-            //         leading: Icon(Icons.money_outlined),
-            //         title: Text("Ksh. 5000"),
-            //
-            //         trailing: IconButton(
-            //             onPressed: (){},
-            //             icon: const Icon(Icons.remove_red_eye)
-            //         ),
-            //       ),
-            //
-            //       SizedBox(height: 10,)
-            //     ],
-            //   ),
-            // ),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      onPressed: (){},
+                      child: const Column(
+                        children: [
+                          Icon(Icons.attach_money),
+                          Text('Dividends')
+                        ],
+                      )
+                  ),
+                  ElevatedButton(
+                      onPressed: (){},
+                      child: const Column(
+                        children: [
+                          Icon(Icons.attach_money),
+                          Text('Dividends')
+                        ],
+                      )
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 10,),
+            const Text('Recent Transaction:', style: TextStyle(fontFamily: 'poppins'),),
+            recentTransaction.isEmpty ?
+                const Center(
+                  child: Text('No Recent Transactions Found'),
+                )
+            :ListView.builder(
+              shrinkWrap: true,
+                itemCount: recentTransaction.length,
+                itemBuilder: (context, index){
+                  return const Card(
+                    child: ListTile(
+                      title: Text('200'),
+                    ),
+                  );
+                }
+            ),
+            const SizedBox(height: 15,),
           ],
         ),
       ),
-      // floatingActionButton:FloatingActionButton(
-      //   onPressed: (){
-      //     Navigator.push(context,
-      //       MaterialPageRoute(builder: (context) => const Register()));
-      //   },
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.blueAccent,
+        elevation: 3,
+          shape: CircularNotchedRectangle(
+
+          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.call),
+              onPressed: () {
+                // Navigate to home screen
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.email),
+              onPressed: () {
+                // Navigate to notifications screen
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_circle),
+              onPressed: () {
+                // Navigate to account screen
+              },
+            ),
+          ],
+        ),
+      ),
     );
+
   }
 }
