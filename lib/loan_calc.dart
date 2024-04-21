@@ -167,10 +167,35 @@ class _loanCalculatorState extends State<loanCalculator> {
                   child: Expanded(
                     child: Column(
                       children: [
-                        const Text('RESULTS:', style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold),),
-                        Text('Total Payment: ${ loanCalc['total_amt']}'),
-                        Text('Interest Amount: ${ loanCalc['interest_amt']}'),
-                        Text('Monthly Payment: ${ loanCalc['monthly_pay']}'),
+                        const Text(
+                          'RESULTS:',
+                          style: TextStyle(
+                              fontFamily: 'poppins',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18
+                          ),
+                        ),
+                        Text(
+                            'Total Payment: ${ loanCalc['total_amt']}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'poppins'
+                          ),
+
+                        ),
+                        Text(
+                            'Interest Amount: ${ loanCalc['interest_amt']}',
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'poppins'
+                          ),
+                        ),
+                        Text('Monthly Payment: ${ loanCalc['monthly_pay']}',
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'poppins'
+                          ),
+                        ),
                       ],
                     ),
                   ),

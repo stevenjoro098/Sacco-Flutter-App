@@ -68,49 +68,73 @@ class _MakeContributionState extends State<MakeContribution> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            TextFormField(
-              controller: _fullnameController,
-              decoration: const InputDecoration(
-                hintText: 'Full Name',
-                prefixIcon: Icon(Icons.person)
-              ),
-              validator: (String? value){
-                if(value == null || value.isEmpty){
-                  return 'Please Enter First Name';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _nationalIDController,
-              decoration: const InputDecoration(
-                  hintText: 'National ID No.',
-                  prefixIcon: Icon(Icons.numbers)
-              ),
-              validator: (String? value){
-                if(value == null || value.isEmpty){
-                  return 'Please Enter First Name';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _amountController,
-              decoration: const InputDecoration(
-                  hintText: 'Amount',
-                  prefixIcon: Icon(Icons.attach_money_sharp)
-              ),
-              validator: (String? value){
-                if(value == null || value.isEmpty){
-                  return 'Please Enter Amount';
-                }
-                return null;
-              },
-            ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const Text(
+                        'Member Details.',
+                        style: TextStyle(
+                          fontFamily: 'poppins',
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
 
-
-            SizedBox(height: 20,),
-            Text('Mode of Payment:'),
+                        )
+                    ),
+                    TextFormField(
+                      controller: _fullnameController,
+                      decoration: const InputDecoration(
+                          hintText: 'Full Name',
+                          prefixIcon: Icon(Icons.person)
+                      ),
+                      validator: (String? value){
+                        if(value == null || value.isEmpty){
+                          return 'Please Enter First Name';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _nationalIDController,
+                      decoration: const InputDecoration(
+                          hintText: 'National ID No.',
+                          prefixIcon: Icon(Icons.numbers)
+                      ),
+                      validator: (String? value){
+                        if(value == null || value.isEmpty){
+                          return 'Please Enter First Name';
+                        }
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      controller: _amountController,
+                      decoration: const InputDecoration(
+                          hintText: 'Amount',
+                          prefixIcon: Icon(Icons.attach_money_sharp)
+                      ),
+                      validator: (String? value){
+                        if(value == null || value.isEmpty){
+                          return 'Please Enter Amount';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 20,)
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20,),
+            const Text(
+              'Mode of Payment:',
+              style: TextStyle(
+              fontFamily: 'poppins',
+                fontWeight: FontWeight.bold,
+                fontSize: 18
+              ),
+            ),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -131,7 +155,7 @@ class _MakeContributionState extends State<MakeContribution> {
                     TextFormField(
                       controller: _textEditingController,
                       decoration: const InputDecoration(
-                        labelText: '+254**********',
+                        labelText: '254**********',
                         border: OutlineInputBorder(),
                       ),
                     ),
