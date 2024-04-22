@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'register.dart';
 import 'make_contribution.dart';
@@ -119,39 +121,55 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 //mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed:(){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const loanCalculator()));
-
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(4.5),
-                      child: Column(
-                        children: [
-                          Icon(Icons.calculate),
-                          Text('Loan Calculator')
-                        ],
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed:(){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const loanCalculator()));
+                    
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)
+                        )
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(4.5),
+                        child: Column(
+                          children: [
+                            Icon(Icons.calculate),
+                            //SizedBox(height: 5,),
+                            Text('Loan Calc')
+                          ],
+                        ),
                       ),
                     ),
                   ),
-
-                  ElevatedButton(
-                    onPressed:(){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Loans()));
-
-                    } ,
-                    child: const Padding(
-                      padding: EdgeInsets.all(4.5),
-                       child: Column(
-                        children: [
-                          Icon(Icons.account_balance),
-                          Text('Loans'),
-                        ],
+                  const SizedBox(width: 20,),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed:(){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const Loans()));
+                    
+                      } ,
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)
+                          )
                       ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(4.5),
+                         child: Column(
+                          children: [
+                            Icon(Icons.account_balance),
+                            Text('Loans'),
+                          ],
+                        ),
+                      ),
+                    
                     ),
                   )
                 ],
@@ -161,23 +179,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  ElevatedButton(
-                      onPressed: (){},
-                      child: const Column(
-                        children: [
-                          Icon(Icons.attach_money),
-                          Text('Dividends')
-                        ],
-                      )
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: (){},
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)
+                          )
+                      ),
+                        child: const Column(
+                          children: [
+                            Icon(Icons.attach_money),
+                            Text('Dividends Calc')
+                          ],
+                        ),
+                    ),
                   ),
-                  ElevatedButton(
-                      onPressed: (){},
-                      child: const Column(
-                        children: [
-                          Icon(Icons.attach_money),
-                          Text('Dividends')
-                        ],
-                      )
+                  const SizedBox(width: 10,),
+                  Expanded(
+                    child: ElevatedButton(
+                        onPressed: (){
+                          
+                        },
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)
+                            )
+                        ),
+                        child: const Column(
+                          children: [
+                            Icon(Icons.attach_money),
+                            Text('Dividends')
+                          ],
+                        )
+                    ),
                   )
                 ],
               ),

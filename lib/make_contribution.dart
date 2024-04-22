@@ -68,20 +68,21 @@ class _MakeContributionState extends State<MakeContribution> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            const Text(
+                'Member Details.',
+                style: TextStyle(
+                  fontFamily: 'poppins',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+
+                )
+            ),
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    const Text(
-                        'Member Details.',
-                        style: TextStyle(
-                          fontFamily: 'poppins',
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
 
-                        )
-                    ),
                     TextFormField(
                       controller: _fullnameController,
                       decoration: const InputDecoration(

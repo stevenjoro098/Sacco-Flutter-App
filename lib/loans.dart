@@ -49,7 +49,12 @@ class _LoansState extends State<Loans> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Loans', style: TextStyle(fontFamily: 'poppins'),),
+        title: const
+        Text('Loans', style:
+                TextStyle(
+                    fontFamily: 'poppins'),
+        ),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -60,8 +65,10 @@ class _LoansState extends State<Loans> {
             :ListView.builder(
                 itemCount: loans_list.length,
                 itemBuilder: (context, index){
+                  final status = loans_list[index]['status'];
+                  Color cardColor = status == 'Approved' ? Colors.green : Colors.deepOrangeAccent;
                   return Card(
-                    color: Colors.blueAccent,
+                    color: cardColor,
                     child: Column(
                       children: <Widget>[
                         ListTile(
@@ -79,22 +86,40 @@ class _LoansState extends State<Loans> {
                               labelStyle: const TextStyle(color: Colors.black), // Set the text color
                               backgroundColor: Colors.yellow, // Set the background color
                             ),
-                            ElevatedButton(
-                                onPressed: (){
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) => const loanDetails()));
-                                },
-                                child: Text('View')
-                            ),
+                            if(status == 'Approved')
+                              ElevatedButton(
+                                  onPressed: (){
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => const loanDetails()));
+                                  },
+                                  child: Text('View')
+                              ),
+
                           ],
                         ),
 
-                        SizedBox(height: 10,)
+                        const SizedBox(height: 10,)
                       ],
                     ),
                   );
                 },
               ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const makeApplication()));
+
+        },
+        child: const Padding(
+          padding: EdgeInsets.all(3.0),
+          child: Column(
+            children: [
+              Icon(Icons.add),
+              Text('Apply')
+            ],
+          ),
+        ),
       ),
 
     );
