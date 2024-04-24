@@ -8,11 +8,13 @@ class userProfile extends StatefulWidget {
 }
 
 class _userProfileState extends State<userProfile> {
+  bool _displayEditForm = false;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -46,7 +48,74 @@ class _userProfileState extends State<userProfile> {
                     ],
                   ),
                 ),
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: (){
+                    setState(() {
+                      _displayEditForm = !_displayEditForm;
+                    });
+                  },
+                  child: const Text('Edit Profile'),
+                ),
+              ],
+            ),
+            if(_displayEditForm)...[
+              Card(
+                color: Colors.lightBlueAccent[100],
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(Icons.person),
+                          SizedBox(width: 20,),
+                          Text('Edit Profile Form'),
+                        ],
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'Full Name'
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'National ID/Passport'
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'Residence'
+                        ),
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'DOB'
+                        ),
+                      ),
+                      const SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextButton(
+                            onPressed: (){},
+                            child: const Text('Save'),
+                          ),
+                          TextButton(
+                            onPressed: (){},
+                            child: const Text('Cancel'),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               )
+            ]
+
           ],
         ),
       ),

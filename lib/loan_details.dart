@@ -62,86 +62,86 @@ class _loanDetailsState extends State<loanDetails> {
       appBar: AppBar(
         title: const Text('Loan Details', style: TextStyle(fontFamily: 'poppins'),),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Card(
-              elevation: 2,
-              color: Colors.blueAccent,
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text('Target Amount:-> ${loanDetails['amount']}', style: const TextStyle(fontWeight: FontWeight.bold),),
-                    subtitle: Text('Repayment Period: ${loanDetails['repayment_term']} days', style: const TextStyle(fontWeight: FontWeight.bold),),
-                    trailing: Chip(
-                      label: Text('${ loanDetails['interest_rate']} %', style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold),),
-                      backgroundColor: Colors.green,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Card(
+                elevation: 2,
+                color: Colors.blueAccent,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text('Target Amount:-> ${loanDetails['amount']}', style: const TextStyle(fontWeight: FontWeight.bold),),
+                      subtitle: Text('Repayment Period: ${loanDetails['repayment_term']} days', style: const TextStyle(fontWeight: FontWeight.bold),),
+                      trailing: Chip(
+                        label: Text('${ loanDetails['interest_rate']} %', style: TextStyle(fontFamily: 'poppins', fontWeight: FontWeight.bold),),
+                        backgroundColor: Colors.deepOrangeAccent,
+                      ),
                     ),
+                    ListTile(
+                      title: Text('Date Applied: ${ loanDetails['date_applied']}', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'poppins'),),
+                      subtitle: Text('Date Approve: ${ loanDetails['date_approved']}', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'poppins'),),
+                    ),
+                    ListTile(
+                      title: Text('Total Paid: ${loanDetails['total_paid']}', style: const TextStyle(fontWeight: FontWeight.bold),),
+                    ),
+                    ListTile(
+                      title: Text('Guarantor(s): ${ loanDetails['guarantors']}', style: TextStyle(fontWeight: FontWeight.bold),),
+                    )
+                  ],
+                ),
+              ),
+        
+              const SizedBox(height: 20),
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      child: Image.asset('assets/images/spending.png', width: 40, height: 40,)
                   ),
-                  ListTile(
-                    title: Text('Date Applied: ${ loanDetails['date_applied']}', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'poppins'),),
-                    subtitle: Text('Date Approve: ${ loanDetails['date_approved']}', style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'poppins'),),
+                  const Text(
+                    'Loan Repayments:',
+                    style: TextStyle(fontFamily:'poppins',fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  ListTile(
-                    title: Text('Total Paid: ${loanDetails['total_paid']}', style: const TextStyle(fontWeight: FontWeight.bold),),
-                  ),
-                  ListTile(
-                    title: Text('Guarantor(s): ${ loanDetails['guarantors']}', style: TextStyle(fontWeight: FontWeight.bold),),
+                  IconButton(
+                      onPressed: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const loanRepayment()));
+        
+                      },
+                      icon: const Icon(Icons.mobile_screen_share_outlined),
                   )
                 ],
               ),
-            ),
-
-            const SizedBox(height: 20),
-             Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    child: Image.asset('assets/images/spending.png', width: 40, height: 40,)
-                ),
-                const Text(
-                  'Loan Repayments:',
-                  style: TextStyle(fontFamily:'poppins',fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                    onPressed: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const loanRepayment()));
-
-                    },
-                    icon: const Icon(Icons.mobile_screen_share_outlined),
-                )
-              ],
-            ),
-            loanRepayments.isEmpty ?
-                Center(
-                  child: Image.asset('assets/images/not-found.gif', width: 200, height: 200)
-                )
-            :ListView.builder(
-              shrinkWrap: true,
-              itemCount: loanRepayments.length,
-              itemBuilder: (context, index) {
-                final repayment = loanRepayments[index];
-                return Card(
-                  elevation: 2,
-                  color: Colors.yellow,
-                  child: ListTile(
-                    title: Text('Amount: ${repayment['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
-                    subtitle: Text('Date Paid: ${repayment['date_paid']}', style: const TextStyle(fontFamily: 'poppins', fontSize: 11, fontWeight: FontWeight.bold),),
-                    trailing: Chip(
-                      label: Text('${ repayment['receipt']}', style: const TextStyle(fontWeight: FontWeight.bold),
+              if (loanRepayments.isEmpty) Center(
+                    child: Image.asset('assets/images/not-found.gif', width: 200, height: 200)
+                  ) else ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: loanRepayments.length,
+                        itemBuilder: (context, index) {
+                          final repayment = loanRepayments[index];
+                          return Card(
+                            elevation: 2,
+                            color: Colors.yellow,
+                            child: ListTile(
+                              title: Text('Amount: ${repayment['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
+                              subtitle: Text('Date Paid: ${repayment['date_paid']}', style: const TextStyle(fontFamily: 'poppins', fontSize: 11, fontWeight: FontWeight.bold),),
+                              trailing: Chip(
+                                label: Text('${ repayment['receipt']}', style: const TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                labelStyle: TextStyle(color: Colors.white), // Set the text color
+                                backgroundColor: Colors.cyan, // Set the background color
+                              )
+                            ),
+                          );
+                        },
                       ),
-                      labelStyle: TextStyle(color: Colors.white), // Set the text color
-                      backgroundColor: Colors.deepOrangeAccent, // Set the background color
-                    )
-                  ),
-                );
-              },
-            ),
-
-          ],
-
+        
+            ],
+        
+          ),
         ),
       ),
     );

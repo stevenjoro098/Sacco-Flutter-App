@@ -28,7 +28,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-        fontFamily: 'poppins'
+        fontFamily: 'poppins',
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: Colors.blue,
+          shape: RoundedRectangleBorder( // Round corners of Snackbar
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          insetPadding: EdgeInsets.all(10.0)
+
+        )
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -298,7 +306,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       itemBuilder: (context, index){
                         return Card(
                           child: ListTile(
-                            leading: Icon(Icons.info),
+                            leading: const Icon(Icons.info),
                             title: Text("Ksh. ${recentTransaction[index]['amount']}",style: TextStyle(fontWeight: FontWeight.bold)),
                             subtitle: Text('${recentTransaction[index]['created']}'),
                             trailing: Text("${recentTransaction[index]['receipt_no']}"),
@@ -335,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.account_circle),
+              icon: const Icon(Icons.info_outlined),
               onPressed: () {
                 // Navigate to account screen
               },

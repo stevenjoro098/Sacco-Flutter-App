@@ -42,7 +42,8 @@ class _MakeContributionState extends State<MakeContribution> {
         print(res[0]);
         ScaffoldMessenger.of(context).showSnackBar(
              SnackBar(
-              content: Text('${ res[0] }'),
+                    content:Text(res[0], style: const TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                ),
             )
         );
         resetTextController();

@@ -53,58 +53,80 @@ class _makeApplicationState extends State<makeApplication> {
         title: const Text('Loan Application Form', style: TextStyle(fontFamily:'poppins'),),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _borrowerController,
-                  decoration: const InputDecoration(
-                    hintText: 'National ID',
-                    prefixIcon: Icon(Icons.account_box),
-
-                  ),
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          children: [
+            const Card(
+              color: Colors.white,
+              child: ListTile(
+                title: Text('Loan Interest Rate Calculated at 12% per annum..',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold
                 ),
-                TextFormField(
-                  controller: _amountController,
-                  decoration: const InputDecoration(
-                    hintText: 'Amount',
-                    prefixIcon: Icon(Icons.money),
-
-                  ),
                 ),
-                TextFormField(
-                  controller: _repaymentPeriod,
-                  decoration: const InputDecoration(
-                    hintText: 'Repayment Period',
-                    prefixIcon: Icon(Icons.calendar_month),
-
-                  ),
-                ),
-                const SizedBox(height: 18,),
-                ElevatedButton(
-                    onPressed: (){
-                      final loanData = {
-                        'national_id': _borrowerController.text,
-                        'repayment_period': _repaymentPeriod.text,
-                        'amount': _amountController.text
-                      };
-                      loanApplication(loanData);
-                    },
-                    child: const Text('Submit Application',style: TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),)
-                ),
-                const SizedBox(height: 18,),
-                ElevatedButton(
-                    onPressed: (){},
-                    child: const Text('Cancel',style: TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),)
-                )
-
-              ],
+                leading: Icon(Icons.info),
+              ),
             ),
-          ),
+            SizedBox(height: 20,),
+            Card(
+              elevation: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    const Text('Loan Application Details:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18
+                        ),
+                      ),
+                    TextFormField(
+                      controller: _borrowerController,
+                      decoration: const InputDecoration(
+                        hintText: 'National ID',
+                        prefixIcon: Icon(Icons.account_box),
+
+                      ),
+                    ),
+                    TextFormField(
+                      controller: _amountController,
+                      decoration: const InputDecoration(
+                        hintText: 'Amount',
+                        prefixIcon: Icon(Icons.money),
+
+                      ),
+                    ),
+                    TextFormField(
+                      controller: _repaymentPeriod,
+                      decoration: const InputDecoration(
+                        hintText: 'Repayment Period',
+                        prefixIcon: Icon(Icons.calendar_month),
+
+                      ),
+                    ),
+                    const SizedBox(height: 18,),
+                    ElevatedButton(
+                        onPressed: (){
+                          final loanData = {
+                            'national_id': _borrowerController.text,
+                            'repayment_period': _repaymentPeriod.text,
+                            'amount': _amountController.text
+                          };
+                          loanApplication(loanData);
+                        },
+                        child: const Text('Submit Application',style: TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),)
+                    ),
+                    const SizedBox(height: 18,),
+                    ElevatedButton(
+                        onPressed: (){},
+                        child: const Text('Cancel',style: TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),)
+                    )
+
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

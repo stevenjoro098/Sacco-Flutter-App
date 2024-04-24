@@ -56,54 +56,61 @@ class _LoansState extends State<Loans> {
         ),
 
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: loans_list.isEmpty
-            ? const Center(
-                    child: Text("No data Available"),
-                  )
-            :ListView.builder(
-                itemCount: loans_list.length,
-                itemBuilder: (context, index){
-                  final status = loans_list[index]['status'];
-                  Color cardColor = status == 'Approved' ? Colors.green : Colors.deepOrangeAccent;
-                  return Card(
-                    color: cardColor,
-                    child: Column(
-                      children: <Widget>[
-                        ListTile(
-                          title: Text('Loan Amount: ${ loans_list[index]['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
-                          subtitle: Text('Repayment Period: ${ loans_list[index]['repayment_term']} days.', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
-                          trailing: Image.asset('assets/images/loan.png')
-                          ),
-                        const SizedBox(height: 20,),
-                        Row(
-                          mainAxisAlignment:MainAxisAlignment.spaceAround,
-                          children: [
-
-                            Chip(
-                              label:Text('${loans_list[index]['status']}'),
-                              labelStyle: const TextStyle(color: Colors.black), // Set the text color
-                              backgroundColor: Colors.yellow, // Set the background color
-                            ),
-                            if(status == 'Approved')
-                              ElevatedButton(
-                                  onPressed: (){
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => const loanDetails()));
-                                  },
-                                  child: Text('View')
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            //padding: const EdgeInsets.all(8.0),
+            children: [loans_list.isEmpty
+                ? const Center(
+                        child: Text("No data Available"),
+                      )
+                :ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: loans_list.length,
+                    itemBuilder: (context, index){
+                      final status = loans_list[index]['status'];
+                      Color cardColor = status == 'Approved' ? Colors.green : Colors.grey;
+                      return Card(
+                        color: cardColor,
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: Text('Loan Amount: ${ loans_list[index]['amount']}', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
+                              subtitle: Text('Repayment Period: ${ loans_list[index]['repayment_term']} days.', style: const TextStyle(fontFamily: 'poppins',fontWeight: FontWeight.bold),),
+                              trailing: Image.asset('assets/images/loan.png')
                               ),
+                            const SizedBox(height: 5,),
+                            Row(
+                              mainAxisAlignment:MainAxisAlignment.spaceAround,
+                              children: [
 
+                                Chip(
+                                  label:Text('${loans_list[index]['status']}'),
+                                  labelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold), // Set the text color
+                                  backgroundColor: Colors.cyan, // Set the background color
+                                ),
+                                if(status == 'Approved')
+                                  ElevatedButton(
+                                      onPressed: (){
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (context) => const loanDetails()));
+                                      },
+                                      child: Text('View')
+                                  ),
+
+                              ],
+                            ),
+
+                            const SizedBox(height: 10,)
                           ],
                         ),
-
-                        const SizedBox(height: 10,)
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
+              ]
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
