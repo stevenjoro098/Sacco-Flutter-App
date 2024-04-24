@@ -78,6 +78,7 @@ class _MakeContributionState extends State<MakeContribution> {
                 )
             ),
             Card(
+              color: Colors.blue[100],
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -137,6 +138,7 @@ class _MakeContributionState extends State<MakeContribution> {
               ),
             ),
             Card(
+              color: Colors.lightGreen[100],
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -175,11 +177,13 @@ class _MakeContributionState extends State<MakeContribution> {
                               //print(contribData);
                               sendMemberContribution(contribData);
                             },
-                            child: Text('Pay')
+                            child: Text('Pay', style:TextStyle(fontWeight: FontWeight.bold),)
                         ),
                         ElevatedButton(onPressed: (){
                           _textEditingController.text = "";
-                        }, child: Text('Cancel'))
+                        },
+                            child: Text('Cancel', style: TextStyle(fontWeight: FontWeight.bold),)
+                        )
                       ],
                     )
 

@@ -45,30 +45,41 @@ class _ViewHistoryState extends State<ViewHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Payment History'),
+        title: const Text('Payment History', style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: contrib_list.isEmpty
-             ? Center(
-          child: Text("No data Available"),
-        )
-            :ListView.builder(
-            itemCount: contrib_list.length,
-            itemBuilder: (context, index){
-              return Card(
-                elevation: 2,
-                color: Colors.white24,
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(8.0),
-                  leading: const Icon(Icons.monetization_on),
-                  title: Text('${contrib_list[index]['amount']}', style: TextStyle(fontFamily: 'poppins'),),
-                  subtitle: Text('${contrib_list[index]['created']}', style: TextStyle(fontFamily: 'poppins'),),
-                ),
-              );
-            }
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              contrib_list.isEmpty ?
+                  const Center(
+                    child: Text('No Data Available'),
+                      )
+              :ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: contrib_list.length,
+                  itemBuilder: (context, index){
+                    return Card(
+                      elevation: 2,
+                      color: Colors.blue,
+                      child: ListTile(
+                        //contentPadding: const EdgeInsets.all(8.0),
+                        leading: const Icon(Icons.payments_outlined),
+                        title: Text('Ksh. ${contrib_list[index]['amount']}', style: const TextStyle(fontWeight: FontWeight.bold),),
+                        subtitle: Text('${contrib_list[index]['created']}', style: TextStyle(fontFamily: 'poppins'),),
+                        trailing:Chip(
+                          label: Text("${ contrib_list[index]['receipt_no']}"),
+                          backgroundColor: Colors.green,
+                        ),
+                      ),
+                    );
+                  }
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

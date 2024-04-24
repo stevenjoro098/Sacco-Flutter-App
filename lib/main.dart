@@ -1,12 +1,19 @@
+import 'dart:convert';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 
 import 'register.dart';
 import 'make_contribution.dart';
 import 'view_history.dart';
 import 'loans.dart';
 import 'loan_calc.dart';
+import 'profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +45,49 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- List<Map<String, dynamic>> recentTransaction = [{'amt':200}];
+ List<dynamic> recentTransaction = [];
+ late String totalAmount;
+
+ Future<void> getHomePageData() async {
+   final url = 'http://127.0.0.1:9000/api/home/page/';
+
+   final headers = {
+     'Content-Type': 'application/json; charset=UTF-8',
+     'Accept': "application/json"
+   };
+   try{
+     final response = await http.post(
+       Uri.parse(url),
+       headers: headers,
+       body: jsonEncode({'id':'30306701'}),
+     );
+     if(response.statusCode == 200){
+       var responseData = json.decode(response.body);
+
+       setState(() {
+         totalAmount = responseData['total_amount'];
+         recentTransaction = responseData['contributions'];
+       });
+
+
+     } else{
+       ScaffoldMessenger.of(context).showSnackBar(
+           const SnackBar(
+             content: Text("Unable to Update Home Page"),
+           )
+       );
+
+   }
+   }
+   catch (e) {
+
+   };
+ }
+  @override
+  void initState(){
+   super.initState();
+   getHomePageData();
+  }
   @override
   Widget build(BuildContext context) {
    // than having to individually change instances of widgets.
@@ -61,14 +110,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   IconButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const userProfile()));
+
+                      },
                       icon: const Icon(Icons.person))
                 ],
               ),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('Total Contributions:',
+                  Text('Total Savings:',
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 23,
@@ -83,16 +136,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    leading: Icon(Icons.money_outlined),
-                    title: Text("Ksh. 5000"),
-                    subtitle: Text("Amount"),
+                    leading: const Icon(Icons.payments_outlined),
+                    title: Text("Ksh. ${totalAmount}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                    subtitle: Text("Amount Saved"),
                     trailing: Image.asset('assets/images/cost.png', width: 45,height: 45,),
                   ),
+                  SizedBox(height: 5,),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ElevatedButton(
-                        child: const Text('View History'),
+                        child:  const Row(
+                            children: [
+                                Icon(Icons.history),
+                                SizedBox(width: 5),
+                              Text('View History', style: TextStyle(fontWeight: FontWeight.bold),),
+                                      ],
+                              ),
                         onPressed:(){
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => const ViewHistory()));
@@ -101,7 +161,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       const SizedBox(width: 8),
                       ElevatedButton(
-                        child: const Text('Make Contribution'),
+                        child: const Row(
+                          children: [
+                            Icon(Icons.payment),
+                            SizedBox(width: 5,),
+                            Text('Deposit',style: TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        ),
                         onPressed: () {
 
                           Navigator.push(context,
@@ -116,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 18,),
+            const SizedBox(height: 1,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -141,7 +207,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             Icon(Icons.calculate),
                             //SizedBox(height: 5,),
-                            Text('Loan Calc')
+                            Text('Loan Calc',style: TextStyle(fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -165,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
                          child: Column(
                           children: [
                             Icon(Icons.account_balance),
-                            Text('Loans'),
+                            Text('Loans',style: TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         ),
                       ),
@@ -189,8 +255,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                         child: const Column(
                           children: [
-                            Icon(Icons.attach_money),
-                            Text('Dividends Calc')
+                            Icon(Icons.calculate_outlined),
+                            Text('Dividends Calc',style: TextStyle(fontWeight: FontWeight.bold))
                           ],
                         ),
                     ),
@@ -208,8 +274,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         child: const Column(
                           children: [
-                            Icon(Icons.attach_money),
-                            Text('Dividends')
+                            Icon(Icons.money_outlined),
+                            Text('Dividends',style: TextStyle(fontWeight: FontWeight.bold))
                           ],
                         )
                     ),
@@ -217,24 +283,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
-            const Text('Recent Transaction:', style: TextStyle(fontFamily: 'poppins'),),
+            const SizedBox(height: 5,),
+            const Text('Recent Transaction:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
             recentTransaction.isEmpty ?
                 const Center(
                   child: Text('No Recent Transactions Found'),
                 )
-            :ListView.builder(
-              shrinkWrap: true,
-                itemCount: recentTransaction.length,
-                itemBuilder: (context, index){
-                  return const Card(
-                    child: ListTile(
-                      title: Text('200'),
-                    ),
-                  );
-                }
+            :SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                      itemCount: recentTransaction.length,
+                      itemBuilder: (context, index){
+                        return Card(
+                          child: ListTile(
+                            leading: Icon(Icons.info),
+                            title: Text("Ksh. ${recentTransaction[index]['amount']}",style: TextStyle(fontWeight: FontWeight.bold)),
+                            subtitle: Text('${recentTransaction[index]['created']}'),
+                            trailing: Text("${recentTransaction[index]['receipt_no']}"),
+                          ),
+                        );
+                      }
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 15,),
+            const SizedBox(height: 8,),
           ],
         ),
       ),

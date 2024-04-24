@@ -66,6 +66,7 @@ flutter:
      - assets/images/loan.png
      - assets/images/mpesa.png
      - assets/images/cost.png
+     - assets/images/profile.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
