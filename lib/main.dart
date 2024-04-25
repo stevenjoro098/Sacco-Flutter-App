@@ -14,6 +14,7 @@ import 'view_history.dart';
 import 'loans.dart';
 import 'loan_calc.dart';
 import 'profile.dart';
+import 'news.dart';
 
 void main() {
   runApp(const MyApp());
@@ -343,8 +344,10 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.info_outlined),
+              icon: Image.asset('assets/images/news.png'),
               onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const newsPage()));
                 // Navigate to account screen
               },
             ),

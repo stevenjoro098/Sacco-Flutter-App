@@ -30,7 +30,7 @@ class _loanDetailsState extends State<loanDetails> {
 
       );
       if(response.statusCode == 200){
-        print(json.decode(response.body));
+        //print(json.decode(response.body));
         responseData = json.decode(response.body);
         setState(() {
           loanDetails = responseData['loan_details'];

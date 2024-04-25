@@ -56,15 +56,15 @@ class _makeApplicationState extends State<makeApplication> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            const Card(
+             Card(
               color: Colors.white,
               child: ListTile(
                 title: Text('Loan Interest Rate Calculated at 12% per annum..',
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold
+                   ),
                 ),
-                ),
-                leading: Icon(Icons.info),
+                leading: Image.asset('assets/images/info.png'),
               ),
             ),
             SizedBox(height: 20,),
@@ -82,9 +82,9 @@ class _makeApplicationState extends State<makeApplication> {
                       ),
                     TextFormField(
                       controller: _borrowerController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'National ID',
-                        prefixIcon: Icon(Icons.account_box),
+                        prefixIcon: Icon(Icons.credit_card)
 
                       ),
                     ),

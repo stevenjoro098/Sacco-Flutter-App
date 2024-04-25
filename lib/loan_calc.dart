@@ -70,6 +70,18 @@ class _loanCalculatorState extends State<loanCalculator> {
           child: Column(
             children: [
               Card(
+                color: Colors.white,
+                child: ListTile(
+                  title: Text('Loan Interest Rate Calculated at 12% per annum..',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  leading: Image.asset('assets/images/info.png'),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Card(
                 elevation: 3,
                 color: Colors.blueAccent[100],
                 child: Padding(
@@ -131,7 +143,7 @@ class _loanCalculatorState extends State<loanCalculator> {
                               child: const Row(
                                 children: [
                                   Icon(Icons.calculate),
-                                  Text('Calculate')
+                                  Text('Calculate', style: TextStyle(fontWeight: FontWeight.bold),)
                                 ],
                               )
                           ),
@@ -142,7 +154,7 @@ class _loanCalculatorState extends State<loanCalculator> {
                               child:const Row(
                                 children: [
                                   Icon(Icons.close),
-                                  Text('Cancel')
+                                  Text('Cancel',style: TextStyle(fontWeight: FontWeight.bold),)
                                 ],
                               )
                           ),
