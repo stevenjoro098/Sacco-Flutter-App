@@ -91,15 +91,22 @@ class _MakeContributionState extends State<MakeContribution> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            const Text(
-                'Member Details.',
-                style: TextStyle(
-                  fontFamily: 'poppins',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+             const Row(
+               children: [
+                 Padding(
+                   padding: const EdgeInsets.all(8.0),
+                   child: Text(
+                      'Member Details.',
+                      style: TextStyle(
+                        fontFamily: 'poppins',
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
 
-                )
-            ),
+                      )
+                               ),
+                 ),
+               ],
+             ),
             Card(
               color: Colors.blue[100],
               child: Padding(
@@ -163,18 +170,25 @@ class _MakeContributionState extends State<MakeContribution> {
               ),
             ),
             const SizedBox(height: 20,),
-            const Text(
-              'Mode of Payment:',
-              style: TextStyle(
-              fontFamily: 'poppins',
-                fontWeight: FontWeight.bold,
-                fontSize: 18
+            const Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Mode of Payment:',
+                    style: TextStyle(
+                    fontFamily: 'poppins',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                    ),
+                  ),
+                ],
               ),
             ),
             Card(
               color: Colors.lightGreen[100],
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -200,7 +214,7 @@ class _MakeContributionState extends State<MakeContribution> {
                         )
                       ),
                     ),
-                    SizedBox(height: 6,),
+                    const SizedBox(height: 20,),
                     Row(
                       //mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,7 +229,7 @@ class _MakeContributionState extends State<MakeContribution> {
                               //print(contribData);
                               sendMemberContribution(contribData);
                             },
-                            child: Text('Pay', style:TextStyle(fontWeight: FontWeight.bold),)
+                            child: const Text('Pay', style:TextStyle(fontWeight: FontWeight.bold),)
                         ),
                         ElevatedButton(onPressed: (){
                           _textEditingController.text = "";

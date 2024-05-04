@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Hello, ${ memberFirstName }",
+                  Text("Hello, ${ memberFirstName }.",
                     style: const TextStyle(
                       fontSize: 20,
                       fontFamily: 'Poppins',
@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                         onPressed:(){
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const ViewHistory()));
+                              MaterialPageRoute(builder: (context) => ViewHistory(idNo: widget.id_no,)));
 
                         },
                       ),
@@ -214,16 +214,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     
                       },
                       style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellowAccent[100],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0)
                         )
                       ),
-                      child: const Padding(
+                      child: Padding(
                         padding: EdgeInsets.all(4.5),
                         child: Column(
                           children: [
-                            Icon(Icons.calculate),
-                            //SizedBox(height: 5,),
+                            SizedBox(height: 6,),
+                            Image.asset('assets/images/calculator.png', width: 35,),
+                            SizedBox(height: 5,),
                             Text('Loan Calc',style: TextStyle(fontWeight: FontWeight.bold))
                           ],
                         ),
@@ -235,20 +237,24 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ElevatedButton(
                       onPressed:(){
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const Loans()));
+                            MaterialPageRoute(builder: (context) => Loans( id_no: widget.id_no)));
                     
                       } ,
                       style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellowAccent[100],
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0)
                           )
                       ),
-                      child: const Padding(
+                      child: Padding(
                         padding: EdgeInsets.all(4.5),
                          child: Column(
                           children: [
-                            Icon(Icons.account_balance),
+                            SizedBox(height: 6,),
+                            Image.asset('assets/images/signing.png', width: 35,),
+                            SizedBox(height: 6,),
                             Text('Loans',style: TextStyle(fontWeight: FontWeight.bold)),
+
                           ],
                         ),
                       ),

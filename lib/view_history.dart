@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ViewHistory extends StatefulWidget {
-  const ViewHistory({super.key});
+  var idNo;
+
+  ViewHistory({super.key, required this.idNo});
 
   @override
   State<ViewHistory> createState() => _ViewHistoryState();
@@ -21,7 +23,7 @@ class _ViewHistoryState extends State<ViewHistory> {
     };
     try{
       final response = await http.get(
-        Uri.parse('http://127.0.0.1:9000/api/list/contributions/?param=30306701'),
+        Uri.parse('http://127.0.0.1:9000/api/list/contributions/?param=${ widget.idNo }'),
         headers: headers,
       );
       if(response.statusCode == 200){

@@ -39,8 +39,9 @@ class _userProfileState extends State<userProfile> {
           body: jsonEncode({"id_no":"54321"})
       );
       if(response.statusCode == 200){
+
         var response_data = jsonDecode(response.body);
-        print(response_data['image']);
+
         setState(() {
           imagePath = response_data['image'];
           firstName = response_data['first_name'];
@@ -103,7 +104,7 @@ class _userProfileState extends State<userProfile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             imagePath.isEmpty ? Image.asset('assets/images/profile.png', width: 100, height: 100,)
-                                :Image.network('http://127.0.0.1:9000/media/${imagePath}', width: 300, height: 200,),
+                                :ClipRRect(borderRadius: BorderRadius.circular(26), child: Image.network('http://127.0.0.1:9000/media/${imagePath}', width: 300, height: 200,)),
                             const SizedBox(height: 10,),
                             const Text('Name:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
                             Text("${ firstName } ${ secondName } ${thirdName}",style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 17, color: Colors.blue)),

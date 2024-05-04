@@ -6,7 +6,8 @@ import 'loans_application.dart';
 import 'loan_details.dart';
 
 class Loans extends StatefulWidget {
-  const Loans({super.key});
+  var id_no;
+  Loans({super.key, required this.id_no });
 
   @override
   State<Loans> createState() => _LoansState();
@@ -24,7 +25,7 @@ class _LoansState extends State<Loans> {
     try {
       final response = await http.get(
         Uri.parse(
-            'http://127.0.0.1:9000/api/member/loans/list/?param=30306701'),
+            'http://127.0.0.1:9000/api/member/loans/list/?param=${widget.id_no}'),
         headers: headers,
       );
       if (response.statusCode == 200) {
