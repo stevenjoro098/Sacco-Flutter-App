@@ -15,6 +15,7 @@ import 'loans.dart';
 import 'loan_calc.dart';
 import 'profile.dart';
 import 'news.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,15 +40,16 @@ class MyApp extends StatelessWidget {
 
         )
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: loginPage()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.id_no});
 
   final String title;
+  final String id_no;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -55,7 +57,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
  List<dynamic> recentTransaction = [];
- late String totalAmount;
+ late String totalAmount = "";
+ late String memberFirstName = "";
+ late String secondName = "";
+ late String thirdName = "";
 
  Future<void> getHomePageData() async {
    final url = 'http://127.0.0.1:9000/api/home/page/';
@@ -68,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
      final response = await http.post(
        Uri.parse(url),
        headers: headers,
-       body: jsonEncode({'id':'30306701'}),
+       body: jsonEncode({'id': widget.id_no}),
      );
      if(response.statusCode == 200){
        var responseData = json.decode(response.body);
@@ -76,6 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
        setState(() {
          totalAmount = responseData['total_amount'];
          recentTransaction = responseData['contributions'];
+         memberFirstName = responseData['member_first_name'];
+         secondName = responseData['second_name'];
+         thirdName = responseData['third_name'];
        });
 
 
@@ -111,8 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Hello, Stephen",
-                    style: TextStyle(
+                  Text("Hello, ${ memberFirstName }",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.bold
@@ -180,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
 
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const MakeContribution()));
+                              MaterialPageRoute(builder: (context) => MakeContribution(idNo: widget.id_no, firstName: memberFirstName, secondName: secondName,thirdName: thirdName)));
 
                         },
                       ),

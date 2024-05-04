@@ -1,11 +1,23 @@
 import 'dart:convert';
 
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 
 class MakeContribution extends StatefulWidget {
-  const MakeContribution({super.key});
+  var firstName;
+  var secondName;
+  var thirdName;
+
+   MakeContribution({super.key,
+        required this.idNo,
+        required this.firstName,
+        required this.secondName,
+        required this.thirdName
+        });
+
+  final String idNo;
 
   @override
   State<MakeContribution> createState() => _MakeContributionState();
@@ -23,6 +35,11 @@ class _MakeContributionState extends State<MakeContribution> {
     _amountController.text = '';
     _fullnameController.text = '';
     _nationalIDController.text = '';
+  }
+
+  void setTextController (){
+    _fullnameController.text = "${widget.firstName} ${ widget.secondName } ${ widget.thirdName}";
+    _nationalIDController.text = widget.idNo;
   }
   Future<void> sendMemberContribution(Map<String, dynamic> contribData)async {
     final url = 'http://127.0.0.1:9000/api/make/contribution/';
@@ -60,6 +77,11 @@ class _MakeContributionState extends State<MakeContribution> {
 }
 
   @override
+  void initState(){
+      super.initState();
+      setTextController();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -87,9 +109,13 @@ class _MakeContributionState extends State<MakeContribution> {
 
                     TextFormField(
                       controller: _fullnameController,
-                      decoration: const InputDecoration(
+                      readOnly: true,
+                      decoration:  InputDecoration(
                           hintText: 'Full Name',
-                          prefixIcon: Icon(Icons.person)
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/images/profile.png', width: 30,),
+                          ),
                       ),
                       validator: (String? value){
                         if(value == null || value.isEmpty){
@@ -100,9 +126,13 @@ class _MakeContributionState extends State<MakeContribution> {
                     ),
                     TextFormField(
                       controller: _nationalIDController,
-                      decoration: const InputDecoration(
+                      readOnly: true,
+                      decoration:  InputDecoration(
                           hintText: 'National ID No.',
-                          prefixIcon: Icon(Icons.numbers)
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/images/id.png', width: 30,),
+                          ),
                       ),
                       validator: (String? value){
                         if(value == null || value.isEmpty){
@@ -113,9 +143,12 @@ class _MakeContributionState extends State<MakeContribution> {
                     ),
                     TextFormField(
                       controller: _amountController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           hintText: 'Amount',
-                          prefixIcon: Icon(Icons.attach_money_sharp)
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/images/money.png', width: 30,),
+                          ),
                       ),
                       validator: (String? value){
                         if(value == null || value.isEmpty){
@@ -158,9 +191,13 @@ class _MakeContributionState extends State<MakeContribution> {
 
                     TextFormField(
                       controller: _textEditingController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: '254**********',
                         border: OutlineInputBorder(),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset('assets/images/mobile_phone.png', width: 30,),
+                        )
                       ),
                     ),
                     SizedBox(height: 6,),

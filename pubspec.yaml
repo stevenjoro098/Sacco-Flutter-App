@@ -72,6 +72,12 @@ flutter:
      - assets/images/newspaper.png
      - assets/images/id-card.png
      - assets/images/world-news.png
+     - assets/images/facebook.png
+     - assets/images/google-symbol.png
+     - assets/images/twitter.png
+     - assets/images/money.png
+     - assets/images/id.png
+     - assets/images/mobile_phone.png
 
 
 
