@@ -8,7 +8,8 @@ import 'package:http/http.dart' as http;
 import 'login.dart';
 
 class userProfile extends StatefulWidget {
-  const userProfile({super.key});
+  var idNo;
+  userProfile({super.key, required this.idNo});
 
   @override
   State<userProfile> createState() => _userProfileState();
@@ -36,7 +37,7 @@ class _userProfileState extends State<userProfile> {
       final response = await http.post(
           Uri.parse('http://127.0.0.1:9000/api/member/profile/'),
           headers: headers,
-          body: jsonEncode({"id_no":"54321"})
+          body: jsonEncode({"id_no": widget.idNo})
       );
       if(response.statusCode == 200){
 

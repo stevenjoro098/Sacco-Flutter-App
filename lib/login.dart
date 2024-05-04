@@ -67,7 +67,7 @@ class _loginPageState extends State<loginPage> {
                       fontSize: 35
                   ),
                 ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               TextFormField(
                 controller: username,
                 decoration: const InputDecoration(
@@ -84,13 +84,13 @@ class _loginPageState extends State<loginPage> {
                   labelText: 'Password'
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                     TextButton(
                         onPressed: (){},
-                        child: Text('Forgot Password?')
+                        child: const Text('Forgot Password?')
                     )
                 ],
               ),
@@ -111,8 +111,9 @@ class _loginPageState extends State<loginPage> {
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.cyan, // Text color
                         elevation: 4, // Elevation
+                        minimumSize: const Size(100, 50),
                         // padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0), // Button padding
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 15.0, // Text size
                           fontWeight: FontWeight.bold, // Text weight
                         ),
@@ -121,7 +122,7 @@ class _loginPageState extends State<loginPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(height: 15,),
               Row(
                 children: [
                   Expanded(
@@ -130,10 +131,9 @@ class _loginPageState extends State<loginPage> {
                         child: const Text("Cancel"),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Colors.redAccent, // Text color
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0), // Rounded corners
-                        ),
+                        backgroundColor: Colors.redAccent,
+                        minimumSize: const Size(100, 50),// Text color
+
                         elevation: 4, // Elevation
                         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0), // Button padding
                         textStyle: const TextStyle(
@@ -145,31 +145,34 @@ class _loginPageState extends State<loginPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 30,),
-              Text("or"),
-              SizedBox(height: 30,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+              const SizedBox(height: 20,),
+              const Text("or"),
+              const SizedBox(height: 20,),
+              Card(
+                color: Colors.white60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                      IconButton(
+                          onPressed: (){}, 
+                          icon: Image.asset('assets/images/facebook.png', width: 40,)
+                      ),
+                    const SizedBox(width: 20,),
                     IconButton(
-                        onPressed: (){}, 
-                        icon: Image.asset('assets/images/facebook.png', width: 40,)
+                        onPressed: (){},
+                        icon: Image.asset('assets/images/twitter.png', width: 40,)
                     ),
-                  SizedBox(width: 20,),
-                  IconButton(
-                      onPressed: (){},
-                      icon: Image.asset('assets/images/twitter.png', width: 40,)
-                  ),
-                  SizedBox(width: 20,),
-                  IconButton(
-                      onPressed: (){},
-                      icon: Image.asset('assets/images/google-symbol.png', width: 40,)
-                  )
-                ],
+                    const SizedBox(width: 20,),
+                    IconButton(
+                        onPressed: (){},
+                        icon: Image.asset('assets/images/google-symbol.png', width: 40,)
+                    )
+                  ],
+                ),
               ),
-              SizedBox(height: 20,),
-              Text("Or"),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
+              const Text("Or"),
+              const SizedBox(height: 20,),
               ElevatedButton(
                   onPressed: (){
                     Navigator.push(context,
@@ -177,7 +180,7 @@ class _loginPageState extends State<loginPage> {
                     //
                   },
 
-                  child: Text("Register"),
+                  child: const Text("Register"),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.blue, // Text color
@@ -185,8 +188,8 @@ class _loginPageState extends State<loginPage> {
                     borderRadius: BorderRadius.circular(10.0), // Rounded corners
                   ),
                   elevation: 4, // Elevation
-                  padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0), // Button padding
-                  textStyle: TextStyle(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0), // Button padding
+                  textStyle: const TextStyle(
                     fontSize: 16.0, // Text size
                     fontWeight: FontWeight.bold, // Text weight
                   ),

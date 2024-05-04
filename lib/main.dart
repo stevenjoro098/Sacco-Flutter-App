@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget {
           shape: RoundedRectangleBorder( // Round corners of Snackbar
             borderRadius: BorderRadius.circular(20.0),
           ),
-          insetPadding: EdgeInsets.all(10.0)
+          insetPadding: const EdgeInsets.all(10.0)
 
         )
       ),
-      home: loginPage()//const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const loginPage()//const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -109,237 +109,265 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
    // than having to individually change instances of widgets.
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.start,
-          //mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-              const SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Hello, ${ memberFirstName }.",
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.start,
+            //mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+                const SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Hello, ${ memberFirstName }.",
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
-                  ),
-                  IconButton(
-                      onPressed: (){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const userProfile()));
-
-                      },
-                      icon: const Icon(Icons.person))
-                ],
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Total Savings:',
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 23,
-                      fontFamily: 'Poppins'
-                    )
+                    IconButton(
+                        onPressed: (){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) =>  userProfile( idNo: widget.id_no )));
+        
+                        },
+                        icon: const Icon(Icons.person))
+                  ],
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Total Savings:',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 23,
+                        fontFamily: 'Poppins'
+                      )
+                      ),
+                  ],
+                ),
+                Card(
+                  color: Colors.blueAccent,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.payments_outlined),
+                      title: Text("Ksh. ${totalAmount}",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                      subtitle: const Text("Amount Saved"),
+                      trailing: Image.asset('assets/images/cost.png', width: 45,height: 45,),
                     ),
-                ],
-              ),
-              Card(
-                color: Colors.blueAccent,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.payments_outlined),
-                    title: Text("Ksh. ${totalAmount}",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                    subtitle: Text("Amount Saved"),
-                    trailing: Image.asset('assets/images/cost.png', width: 45,height: 45,),
-                  ),
-                  SizedBox(height: 5,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      ElevatedButton(
-                        child:  const Row(
+                    const SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        ElevatedButton(
+                          child:  const Row(
+                              children: [
+                                  Icon(Icons.history),
+                                  SizedBox(width: 5),
+                                Text('View History', style: TextStyle(fontWeight: FontWeight.bold),),
+                                        ],
+                                ),
+                          onPressed:(){
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => ViewHistory(idNo: widget.id_no,)));
+        
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton(
+                          child: const Row(
                             children: [
-                                Icon(Icons.history),
-                                SizedBox(width: 5),
-                              Text('View History', style: TextStyle(fontWeight: FontWeight.bold),),
-                                      ],
-                              ),
+                              Icon(Icons.payment),
+                              SizedBox(width: 5,),
+                              Text('Deposit',style: TextStyle(fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                          onPressed: () {
+        
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => MakeContribution(idNo: widget.id_no, firstName: memberFirstName, secondName: secondName,thirdName: thirdName)));
+        
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                      ],
+                    ),
+                    const SizedBox(height: 10,)
+                  ],
+                ),
+              ),
+              const SizedBox(height: 1,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  //mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
                         onPressed:(){
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => ViewHistory(idNo: widget.id_no,)));
-
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                      ElevatedButton(
-                        child: const Row(
-                          children: [
-                            Icon(Icons.payment),
-                            SizedBox(width: 5,),
-                            Text('Deposit',style: TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        onPressed: () {
-
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => MakeContribution(idNo: widget.id_no, firstName: memberFirstName, secondName: secondName,thirdName: thirdName)));
-
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                  ),
-                  SizedBox(height: 10,)
-                ],
-              ),
-            ),
-            const SizedBox(height: 1,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                //mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed:(){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const loanCalculator()));
-                    
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellowAccent[100],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0)
-                        )
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(4.5),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 6,),
-                            Image.asset('assets/images/calculator.png', width: 35,),
-                            SizedBox(height: 5,),
-                            Text('Loan Calc',style: TextStyle(fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20,),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed:(){
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Loans( id_no: widget.id_no)));
-                    
-                      } ,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.yellowAccent[100],
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                          )
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(4.5),
-                         child: Column(
-                          children: [
-                            SizedBox(height: 6,),
-                            Image.asset('assets/images/signing.png', width: 35,),
-                            SizedBox(height: 6,),
-                            Text('Loans',style: TextStyle(fontWeight: FontWeight.bold)),
-
-                          ],
-                        ),
-                      ),
-                    
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: (){},
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                          )
-                      ),
-                        child: const Column(
-                          children: [
-                            Icon(Icons.calculate_outlined),
-                            Text('Dividends Calc',style: TextStyle(fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                    ),
-                  ),
-                  const SizedBox(width: 10,),
-                  Expanded(
-                    child: ElevatedButton(
-                        onPressed: (){
-                          
+                              MaterialPageRoute(builder: (context) => const loanCalculator()));
+                      
                         },
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellowAccent[100],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)
+                          )
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.5),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 6,),
+                              Image.asset('assets/images/calculator.png', width: 35,),
+                              const SizedBox(height: 5,),
+                              const Text('Loan Calc',style: TextStyle(fontWeight: FontWeight.bold))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 20,),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed:(){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Loans( id_no: widget.id_no)));
+                      
+                        } ,
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.yellowAccent[100],
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0)
                             )
                         ),
-                        child: const Column(
-                          children: [
-                            Icon(Icons.money_outlined),
-                            Text('Dividends',style: TextStyle(fontWeight: FontWeight.bold))
-                          ],
-                        )
-                    ),
-                  )
-                ],
-              ),
-            ),
-            const SizedBox(height: 5,),
-            const Text('Recent Transaction:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
-            recentTransaction.isEmpty ?
-                const Center(
-                  child: Text('No Recent Transactions Found'),
-                )
-            :SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                      itemCount: recentTransaction.length,
-                      itemBuilder: (context, index){
-                        return Card(
-                          child: ListTile(
-                            leading: const Icon(Icons.info),
-                            title: Text("Ksh. ${recentTransaction[index]['amount']}",style: TextStyle(fontWeight: FontWeight.bold)),
-                            subtitle: Text('${recentTransaction[index]['created']}'),
-                            trailing: Text("${recentTransaction[index]['receipt_no']}"),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.5),
+                           child: Column(
+                            children: [
+                              const SizedBox(height: 6,),
+                              Image.asset('assets/images/signing.png', width: 35,),
+                              const SizedBox(height: 6,),
+                              const Text('Loans',style: TextStyle(fontWeight: FontWeight.bold)),
+        
+                            ],
                           ),
-                        );
-                      }
-                  ),
-                ],
+                        ),
+                      
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 8,),
-          ],
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed:(){
+        
+                        } ,
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.yellowAccent[100],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)
+                            )
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.5),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 6,),
+                              Image.asset('assets/images/budget.png', width: 35,),
+                              const SizedBox(height: 6,),
+                              const Text('Dividends Calc',style: TextStyle(fontWeight: FontWeight.bold)),
+        
+                            ],
+                          ),
+                        ),
+        
+                      ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed:(){
+        
+                        } ,
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.yellowAccent[100],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0)
+                            )
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.5),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 6,),
+                              Image.asset('assets/images/money.png', width: 35,),
+                              const SizedBox(height: 6,),
+                              const Text('Dividends',style: TextStyle(fontWeight: FontWeight.bold)),
+        
+                            ],
+                          ),
+                        ),
+        
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 5,),
+              const Padding(
+                padding: EdgeInsets.all(6.0),
+                child: Row(
+                  children: [
+                    Text('Recent Transaction:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),),
+                  ],
+                ),
+              ),
+              recentTransaction.isEmpty ?
+                  const Center(
+                    child: Text('No Recent Transactions Found'),
+                  )
+              :SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                        itemCount: recentTransaction.length,
+                        itemBuilder: (context, index){
+                          return Card(
+                            color: Colors.deepOrangeAccent[100],
+                            child: ListTile(
+                              leading: const Icon(Icons.info),
+                              title: Text("Ksh. ${recentTransaction[index]['amount']}",style: const TextStyle(fontWeight: FontWeight.bold)),
+                              subtitle: Text('${recentTransaction[index]['created']}'),
+                              trailing: Text("${recentTransaction[index]['receipt_no']}"),
+                            ),
+                          );
+                        }
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8,),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blueAccent,
         elevation: 3,
-          shape: CircularNotchedRectangle(
+          shape: const CircularNotchedRectangle(
 
           ),
         child: Row(
