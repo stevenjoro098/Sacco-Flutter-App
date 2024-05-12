@@ -1,8 +1,9 @@
-import 'dart:convert';
-import 'dart:ui';
+import 'dart:convert';   // library utility for json conversion. encoding and decoding.
+import 'dart:ui'; //is library that provides low-level access  to flutter graphics engine
+// and input capabilities.
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart'; //iOs style  widgets for UI
+import 'package:flutter/material.dart';  //provides material design for UI
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -17,6 +18,8 @@ import 'profile.dart';
 import 'news.dart';
 import 'login.dart';
 
+var BASE_url = "http://127.0.0.1:9000";
+
 void main() {
   runApp(const MyApp());
 }
@@ -26,12 +29,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+      title: 'Sacco App',
+      theme: ThemeData( // define app theme properties.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         fontFamily: 'poppins',
-        snackBarTheme: SnackBarThemeData(
+        snackBarTheme: SnackBarThemeData( // define Snackbar theme
           backgroundColor: Colors.blue,
           shape: RoundedRectangleBorder( // Round corners of Snackbar
             borderRadius: BorderRadius.circular(20.0),
@@ -56,38 +59,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- List<dynamic> recentTransaction = [];
- late String totalAmount = "";
- late String memberFirstName = "";
- late String secondName = "";
- late String thirdName = "";
 
- Future<void> getHomePageData() async {
-   final url = 'http://127.0.0.1:9000/api/home/page/';
+ List<dynamic> recentTransaction = []; // list of recent transactions.
+ late String totalAmount = ""; // String for total amount
+ late String memberFirstName = ""; // String first name
+ late String secondName = ""; //String second name
+ late String thirdName = "";  // String third name.
 
+ Future<void> getHomePageData() async { // Asynchronous request for homepage data
+   final url = '$BASE_url /api/home/page/';  // server Url
+   // define header
    final headers = {
      'Content-Type': 'application/json; charset=UTF-8',
      'Accept': "application/json"
    };
+
    try{
-     final response = await http.post(
+     final response = await http.post( // the Http library method
        Uri.parse(url),
        headers: headers,
-       body: jsonEncode({'id': widget.id_no}),
+       body: jsonEncode({'id': widget.id_no}), // encode the id data.
      );
-     if(response.statusCode == 200){
-       var responseData = json.decode(response.body);
+
+     if(response.statusCode == 200){ // Check on request status code from the server
+       var responseData = json.decode(response.body); // define a variable and decode the response data.
 
        setState(() {
-         totalAmount = responseData['total_amount'];
-         recentTransaction = responseData['contributions'];
-         memberFirstName = responseData['member_first_name'];
-         secondName = responseData['second_name'];
-         thirdName = responseData['third_name'];
+         // render the data to the widgets.
+           totalAmount = responseData['total_amount'];
+           recentTransaction = responseData['contributions'];
+           memberFirstName = responseData['member_first_name'];
+           secondName = responseData['second_name'];
+           thirdName = responseData['third_name'];
        });
 
 
      } else{
+       // if error render/ any other status code
        ScaffoldMessenger.of(context).showSnackBar(
            const SnackBar(
              content: Text("Unable to Update Home Page"),
@@ -97,21 +105,26 @@ class _MyHomePageState extends State<MyHomePage> {
    }
    }
    catch (e) {
-
+     ScaffoldMessenger.of(context).showSnackBar(
+         const SnackBar(
+           content: Text(""),
+         )
+     );
    };
  }
   @override
   void initState(){
+   // override the initialize method.
    super.initState();
-   getHomePageData();
+   getHomePageData(); // call the method on initialization
   }
   @override
   Widget build(BuildContext context) {
    // than having to individually change instances of widgets.
-    return Scaffold(
+    return Scaffold( //
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0), 
           child: Column(
             //mainAxisAlignment: MainAxisAlignment.start,
             //mainAxisSize: MainAxisSize.max,
@@ -120,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Hello, ${ memberFirstName }.",
+                    Text("Hello, $memberFirstName .",
                       style: const TextStyle(
                         fontSize: 20,
                         fontFamily: 'Poppins',
@@ -155,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     ListTile(
                       leading: const Icon(Icons.payments_outlined),
-                      title: Text("Ksh. ${totalAmount}",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                      title: Text("Ksh. $totalAmount",style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                       subtitle: const Text("Amount Saved"),
                       trailing: Image.asset('assets/images/cost.png', width: 45,height: 45,),
                     ),

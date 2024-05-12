@@ -17,7 +17,7 @@ class userProfile extends StatefulWidget {
 
 class _userProfileState extends State<userProfile> {
   bool _displayEditForm = false;
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();  //unUsed form.
 
   String firstName = "";
   String secondName = "";
@@ -76,14 +76,14 @@ class _userProfileState extends State<userProfile> {
       appBar: AppBar(
         title: const Text('Profile'),
         actions: [
-          IconButton(
+          TextButton(
               onPressed:(){
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const loginPage()));
 
 
               },
-              icon: const Icon(Icons.login)
+              child: Text('Sign Out')
           ),
           const SizedBox(width: 30,),
 
